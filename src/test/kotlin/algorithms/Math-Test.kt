@@ -143,4 +143,22 @@ class `Math-Test` {
         assertEquals(97, primes.next())
         assertEquals(101, primes.next())
     }
+
+    @Test
+    fun findFactors_test() {
+        assertEquals(listOf<Pair<Long, Long>>(Pair(1, 2L)), findFactors( 2L))
+        assertEquals(listOf<Pair<Long, Long>>(Pair(1, 3L)), findFactors( 3L))
+        assertEquals(
+                listOf<Pair<Long, Long>>(Pair(1, 4L), Pair(2, 2)),
+                findFactors( 4L)
+        )
+        assertEquals(
+                listOf<Pair<Long, Long>>(Pair(1, 5L)),
+                findFactors( 5L)
+        )
+        assertEquals(
+                listOf<Pair<Long, Long>>(Pair(1, 6L), Pair(2, 3), Pair(3, 2)),
+                findFactors( 6L)
+        )
+    }
 }

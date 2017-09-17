@@ -126,3 +126,19 @@ fun primes(max: Long): Iterator<Long> {
         }
     }
 }
+
+fun findFactors(number: Long): List<Pair<Long, Long>> =
+    generateSequence (1L ){ it + 1 }
+            .takeWhile { it < number }
+            .filter { number % it == 0L }
+            .map { Pair(it, number / it) }
+            .toList()
+//    var i = 1L
+//    val factors = ArrayList<Pair<Long, Long>>()
+//    while (i < number) {
+//        if (number % i == 0L) {
+//            factors.add(Pair(i, number / i))
+//        }
+//        i++
+//    }
+//    return factors
