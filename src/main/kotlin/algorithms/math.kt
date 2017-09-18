@@ -129,7 +129,7 @@ fun primes(max: Long): Iterator<Long> {
 
 fun findFactors(number: Long): List<Pair<Long, Long>> =
     generateSequence (1L ){ it + 1 }
-            .takeWhile { it < number }
+            .takeWhile { it < (1 + number / 2) } // no point checking more than half the number for factors
             .filter { number % it == 0L }
             .map { Pair(it, number / it) }
             .toList()
