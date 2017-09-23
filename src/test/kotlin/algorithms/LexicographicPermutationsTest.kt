@@ -5,7 +5,7 @@ import kotlin.test.assertEquals
 
 class LexicographicPermutationsTest {
     @Test
-    operator fun next() {
+    fun iterator_for_primes() {
         time {
             val lexicographicPermutations = LexicographicPermutations(listOf(1, 2, 4))
             assertEquals(listOf(1, 2, 4), lexicographicPermutations.next())
