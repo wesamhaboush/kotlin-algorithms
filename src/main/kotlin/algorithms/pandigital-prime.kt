@@ -22,10 +22,8 @@ so, we can look for mutations of
 so only two simple range of mutations to look in.
         */
 
-fun largestPrimePandigital(): Long {
-    return LexicographicPermutations(listOf(7, 6, 5, 4, 3, 2, 1))
-            .asSequence()
-            .onEach { println("considering $it") }
-            .map { digitsToNumber(it) }
-            .first { isPrime(it) }
-}
+fun largestPrimePandigital(): Long =
+        LexicographicPermutations(listOf(7, 6, 5, 4, 3, 2, 1))
+                .asSequence()
+                .map { digitsToNumber(it) }
+                .first { isPrime(it) }

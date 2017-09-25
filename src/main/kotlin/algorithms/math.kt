@@ -133,12 +133,18 @@ fun findFactors(number: Long): List<Pair<Long, Long>> =
             .filter { number % it == 0L }
             .map { Pair(it, number / it) }
             .toList()
-//    var i = 1L
-//    val factors = ArrayList<Pair<Long, Long>>()
-//    while (i < number) {
-//        if (number % i == 0L) {
-//            factors.add(Pair(i, number / i))
-//        }
-//        i++
-//    }
-//    return factors
+
+fun isPerfectSquare(n: Long): Boolean {
+    return n >= 0 && when (n.and(0xF)) {
+        0L, 1L, 4L, 9L -> isSquareRootPerfect(n)
+        else -> false
+    }
+}
+
+private fun isSquareRootPerfect(n: Long): Boolean {
+    val nAsDouble = n.toDouble()
+    val tst = Math.sqrt(nAsDouble).toLong()
+    return tst * tst == n
+}
+
+fun isTriangularNumber(n: Long): Boolean = isPerfectSquare(8 * n + 1)

@@ -161,4 +161,33 @@ class `Math-Test` {
                 findFactors( 6L)
         )
     }
+
+    @Test
+    fun isPerfectSquare_test() {
+        time { assertTrue(isPerfectSquare( 0L)) }
+        time { assertTrue(isPerfectSquare( 1L)) }
+        time { assertTrue(isPerfectSquare( 4L)) }
+        time { assertTrue(isPerfectSquare( 81L)) }
+        time { assertFalse(isPerfectSquare( -1L)) }
+        time { assertFalse(isPerfectSquare( 2L)) }
+        time { assertFalse(isPerfectSquare( 22L)) }
+        time { assertFalse(isPerfectSquare( 101L)) }
+    }
+
+    @Test
+    fun isTriangularNumber_test() {
+        //1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...
+        time { assertTrue(isTriangularNumber( 55L)) }
+        time { assertTrue(isTriangularNumber( 45)) }
+        time { assertTrue(isTriangularNumber( 36)) }
+        time { assertTrue(isTriangularNumber( 28)) }
+        time { assertTrue(isTriangularNumber( 21)) }
+        time { assertTrue(isTriangularNumber( 15)) }
+        time { assertTrue(isTriangularNumber( 10)) }
+        time { assertTrue(isTriangularNumber( 6)) }
+        time { assertTrue(isTriangularNumber( 3)) }
+        time { assertTrue(isTriangularNumber( 1)) }
+        time { assertFalse(isTriangularNumber( 56L)) }
+        time { assertFalse(isTriangularNumber( 16L)) }
+    }
 }
