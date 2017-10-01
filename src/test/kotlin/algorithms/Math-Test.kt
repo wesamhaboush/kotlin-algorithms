@@ -146,48 +146,141 @@ class `Math-Test` {
 
     @Test
     fun findFactors_test() {
-        assertEquals(listOf<Pair<Long, Long>>(Pair(1, 2L)), findFactors( 2L))
-        assertEquals(listOf<Pair<Long, Long>>(Pair(1, 3L)), findFactors( 3L))
+        assertEquals(listOf<Pair<Long, Long>>(Pair(1, 2L)), findFactors(2L))
+        assertEquals(listOf<Pair<Long, Long>>(Pair(1, 3L)), findFactors(3L))
         assertEquals(
                 listOf<Pair<Long, Long>>(Pair(1, 4L), Pair(2, 2)),
-                findFactors( 4L)
+                findFactors(4L)
         )
         assertEquals(
                 listOf<Pair<Long, Long>>(Pair(1, 5L)),
-                findFactors( 5L)
+                findFactors(5L)
         )
         assertEquals(
                 listOf<Pair<Long, Long>>(Pair(1, 6L), Pair(2, 3), Pair(3, 2)),
-                findFactors( 6L)
+                findFactors(6L)
         )
     }
 
     @Test
     fun isPerfectSquare_test() {
-        time { assertTrue(isPerfectSquare( 0L)) }
-        time { assertTrue(isPerfectSquare( 1L)) }
-        time { assertTrue(isPerfectSquare( 4L)) }
-        time { assertTrue(isPerfectSquare( 81L)) }
-        time { assertFalse(isPerfectSquare( -1L)) }
-        time { assertFalse(isPerfectSquare( 2L)) }
-        time { assertFalse(isPerfectSquare( 22L)) }
-        time { assertFalse(isPerfectSquare( 101L)) }
+        time { assertTrue(isPerfectSquare(0L)) }
+        time { assertTrue(isPerfectSquare(1L)) }
+        time { assertTrue(isPerfectSquare(4L)) }
+        time { assertTrue(isPerfectSquare(81L)) }
+        time { assertFalse(isPerfectSquare(-1L)) }
+        time { assertFalse(isPerfectSquare(2L)) }
+        time { assertFalse(isPerfectSquare(22L)) }
+        time { assertFalse(isPerfectSquare(101L)) }
     }
 
     @Test
     fun isTriangularNumber_test() {
         //1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...
-        time { assertTrue(isTriangularNumber( 55L)) }
-        time { assertTrue(isTriangularNumber( 45)) }
-        time { assertTrue(isTriangularNumber( 36)) }
-        time { assertTrue(isTriangularNumber( 28)) }
-        time { assertTrue(isTriangularNumber( 21)) }
-        time { assertTrue(isTriangularNumber( 15)) }
-        time { assertTrue(isTriangularNumber( 10)) }
-        time { assertTrue(isTriangularNumber( 6)) }
-        time { assertTrue(isTriangularNumber( 3)) }
-        time { assertTrue(isTriangularNumber( 1)) }
-        time { assertFalse(isTriangularNumber( 56L)) }
-        time { assertFalse(isTriangularNumber( 16L)) }
+        time { assertTrue(isTriangularNumber(55L)) }
+        time { assertTrue(isTriangularNumber(45)) }
+        time { assertTrue(isTriangularNumber(36)) }
+        time { assertTrue(isTriangularNumber(28)) }
+        time { assertTrue(isTriangularNumber(21)) }
+        time { assertTrue(isTriangularNumber(15)) }
+        time { assertTrue(isTriangularNumber(10)) }
+        time { assertTrue(isTriangularNumber(6)) }
+        time { assertTrue(isTriangularNumber(3)) }
+        time { assertTrue(isTriangularNumber(1)) }
+        time { assertFalse(isTriangularNumber(56L)) }
+        time { assertFalse(isTriangularNumber(16L)) }
+    }
+
+    @Test
+    fun powerSet_test() {
+        time {
+            assertEquals(
+                    setOf(setOf(), setOf(1), setOf(2), setOf(1, 2), setOf(4), setOf(1, 4), setOf(2, 4), setOf(1, 2, 4)),
+                    powerSet(setOf(1, 2, 4))
+            )
+        }
+        time {
+            assertEquals(
+                    setOf(setOf(), setOf(1), setOf(4), setOf(1, 4)),
+                    powerSet(setOf(1, 1, 4))
+            )
+        }
+    }
+
+    @Test
+    fun combinations_test() {
+        time {
+            assertEquals(
+                    setOf(
+                            listOf(), listOf(1), listOf(2), listOf(1, 2), listOf(4), listOf(1, 4),
+                            listOf(2, 4), listOf(1, 2, 4)
+                    ),
+                    Combinations.of(listOf(1, 2, 4))
+            )
+        }
+        time {
+            assertEquals(
+                    setOf(
+                            listOf(), listOf(1), listOf(4), listOf(1, 1), listOf(1, 4), listOf(1, 1, 4)
+                    ),
+                    Combinations.of(listOf(1, 1, 4))
+            )
+        }
+        time {
+            assertEquals(
+                    setOf(
+                            listOf(1, 1), listOf(1, 4)
+                    ),
+                    Combinations.of(2, listOf(1, 1, 4))
+            )
+        }
+    }
+
+    @Test
+    fun findSum_test() {
+        time {
+            assertEquals(listOf(3), findSum(listOf(1), listOf(2)))
+            assertEquals(listOf(3, 3), findSum(listOf(1), listOf(3, 2)))
+            assertEquals(listOf(4, 0, 3), findSum(listOf(3, 7, 1), listOf(3, 2)))
+            assertEquals(listOf(6, 0, 3), findSum(listOf(3, 7, 1), listOf(2, 3, 2)))
+            assertEquals(listOf(1, 1, 0, 3), findSum(listOf(5, 7, 1), listOf(5, 3, 2)))
+        }
+    }
+
+    @Test
+    fun sumDigitLists_test() {
+        time {
+            assertEquals(listOf(3), sumDigitLists(
+                    listOf(
+                            listOf(1),
+                            listOf(2)
+                    )
+            ))
+            assertEquals(listOf(3, 3), sumDigitLists(
+                    listOf(
+                            listOf(1),
+                            listOf(3, 2)
+                    )
+            ))
+            assertEquals(listOf(4, 0, 3), sumDigitLists(
+                    listOf(
+                            listOf(3, 7, 1),
+                            listOf(3, 2)
+                    )
+            ))
+            assertEquals(listOf(6, 0, 3), sumDigitLists(
+                    listOf(
+                            listOf(3, 7, 1),
+                            listOf(2, 3, 2)
+                    )
+            ))
+            assertEquals(listOf(6, 4, 2, 3), sumDigitLists(
+                    listOf(
+                               listOf(5, 7, 1),
+                               listOf(5, 3, 2),
+                            listOf(5, 3, 2, 0)
+                    )
+            ))
+        }
     }
 }
