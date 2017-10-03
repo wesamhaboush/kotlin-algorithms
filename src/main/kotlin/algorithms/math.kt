@@ -230,3 +230,36 @@ fun findSum(firstDigitList: List<Int>, secondDigitList: List<Int>): List<Int> {
 
     return result
 }
+
+// give the infinite sequence of pentagonal numbers P(1), P(2), P(3), ...
+fun pentagonals(): Sequence<Pair<Long, Long>> =
+        generateSequence(1L) { it + 1 }
+                .map { Pair(it, pentagonal(it)) }
+
+fun isPentagonal(pn: Long): Boolean {
+    // this check does two things based on the following equation from above:
+    //    n =  (1 +- sqrt(1 + 4 * 3 * 2 * P_n)) / 6
+    //    =  (1 +- sqrt(1 + 24 * P_n)) / 6
+    // it checks the sqrt is integer,
+    // and it checks the whole value of nominator divides by 6
+    val decidingTerm = 1L + 24 * pn
+
+    return isPerfectSquare(decidingTerm) && (Math.sqrt(decidingTerm.toDouble()).toInt() - 5) % 6 == 0
+}
+
+// simply the equation for a pentagonal number P(n)
+fun pentagonal(n: Long): Long = n * (3 * n - 1) / 2
+
+//Tn=n(n+1)/2	 	1, 3, 6, 10, 15, ...
+fun triangulars(): Sequence<Pair<Long, Long>> =
+    generateSequence(1L) { it + 1 }
+            .map { Pair(it, triangular(it)) }
+
+//Hn=n(2n−1)	 	1, 6, 15, 28, 45, ...
+fun hexagonals(): Sequence<Pair<Long, Long>> =
+    generateSequence(1L) { it + 1 }
+            .map { Pair(it, hexagonal(it)) }
+
+fun triangular(n: Long): Long = n * (n + 1) / 2
+
+fun hexagonal(n: Long): Long = n * (2L * n - 1)

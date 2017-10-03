@@ -44,46 +44,33 @@ n =  (1 +- sqrt(1 + 4 * 3 * 2 * P_n)) / 6
 
  */
 
-fun findTargetPentagonalPair(): Pair<Pair<Int, Int>, Pair<Int, Int>> =
+fun findTargetPentagonalPair(): Pair<Pair<Long, Long>, Pair<Long, Long>> =
         // for each pentagonal number Pk
-        pentagonalNumbers()
+        pentagonals()
                 // get all the Pj pentagonal numbers below it starting from the one just below it
                 // note, we start from top down here to minimize the difference
                 .flatMap { maxPn ->
-                    pentagonalNumbersDownFrom(maxPn.first)
+                    pentagonalsDownwards(maxPn.first)
                             .map { Pair(maxPn, it) }
                 }
                 // find those ones that have both sum and difference to be also pentagonal
                 .filter { it ->
                     val difference = it.first.second - it.second.second
                     val sum = it.first.second + it.second.second
-                    isPentagonalNumber(difference) && isPentagonalNumber(sum)
+                    isPentagonal(difference) && isPentagonal(sum)
                 }
                 // we need the first of those only
                 .first()
 
 
-// give the infinite sequence of pentagonal numbers P(1), P(2), P(3), ...
-fun pentagonalNumbers(): Sequence<Pair<Int, Int>> =
-        generateSequence(1) { it + 1 }
-                .map { Pair(it, pentagonalNumber(it)) }
+
 
 // give a sequence of pentagonal numbers starting from P(n), P(n - 1), P(n - 2), ..., P(1).
-fun pentagonalNumbersDownFrom(n: Int): Sequence<Pair<Int, Int>> =
+fun pentagonalsDownwards(n: Long): Sequence<Pair<Long, Long>> =
         generateSequence(n) { it - 1 }
                 .takeWhile { it > 0 }
-                .map { Pair(it, pentagonalNumber(it)) }
+                .map { Pair(it, pentagonal(it)) }
 
-// simply the equation for a pentagonal number P(n)
-fun pentagonalNumber(n: Int): Int = n * (3 * n - 1) / 2
 
-fun isPentagonalNumber(pn: Int): Boolean {
-    // this check does two things based on the following equation from above:
-    //    n =  (1 +- sqrt(1 + 4 * 3 * 2 * P_n)) / 6
-    //    =  (1 +- sqrt(1 + 24 * P_n)) / 6
-    // it checks the sqrt is integer,
-    // and it checks the whole value of nominator divides by 6
-    val decidingTerm = 1L + 24 * pn
 
-    return isPerfectSquare(decidingTerm) && (Math.sqrt(decidingTerm.toDouble()).toInt() - 5) % 6 == 0
-}
+

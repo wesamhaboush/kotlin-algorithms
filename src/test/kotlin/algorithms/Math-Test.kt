@@ -248,6 +248,32 @@ class `Math-Test` {
     }
 
     @Test
+    fun triangulars_test() {
+        time {
+            val triangularsIterator = triangulars().iterator()
+            //Tn=n(n+1)/2	 	1, 3, 6, 10, 15, ...
+            assertEquals(Pair(1L, 1L), triangularsIterator.next())
+            assertEquals(Pair(2L, 3L), triangularsIterator.next())
+            assertEquals(Pair(3L, 6L), triangularsIterator.next())
+            assertEquals(Pair(4L, 10L), triangularsIterator.next())
+            assertEquals(Pair(5L, 15L), triangularsIterator.next())
+        }
+    }
+
+    @Test
+    fun hexagonals_test() {
+        time {
+            val hexagonalsIterator = hexagonals().iterator()
+            //Hn=n(2n−1)	 	1, 6, 15, 28, 45, ...
+            assertEquals(Pair(1L, 1L), hexagonalsIterator.next())
+            assertEquals(Pair(2L, 6L), hexagonalsIterator.next())
+            assertEquals(Pair(3L, 15L), hexagonalsIterator.next())
+            assertEquals(Pair(4L, 28L), hexagonalsIterator.next())
+            assertEquals(Pair(5L, 45L), hexagonalsIterator.next())
+        }
+    }
+
+    @Test
     fun sumDigitLists_test() {
         time {
             assertEquals(listOf(3), sumDigitLists(
@@ -276,8 +302,8 @@ class `Math-Test` {
             ))
             assertEquals(listOf(6, 4, 2, 3), sumDigitLists(
                     listOf(
-                               listOf(5, 7, 1),
-                               listOf(5, 3, 2),
+                            listOf(5, 7, 1),
+                            listOf(5, 3, 2),
                             listOf(5, 3, 2, 0)
                     )
             ))
