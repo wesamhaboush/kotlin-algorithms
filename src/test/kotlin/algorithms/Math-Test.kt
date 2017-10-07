@@ -309,4 +309,26 @@ class `Math-Test` {
             ))
         }
     }
+
+    @Test
+    fun gcd_test() {
+        time { assertEquals(1, gcd(3, 5)) }
+        time { assertEquals(3, gcd(3, 6)) }
+        time { assertEquals(2, gcd(2, 8)) }
+
+        time { assertEquals(1, gcd(listOf(3, 5))) }
+        time { assertEquals(3, gcd(setOf(3, 6))) }
+        time { assertEquals(2, gcd(listOf(2, 8))) }
+        time { assertEquals(2, gcd(listOf(2, 8, 4))) }
+        time { assertEquals(7, gcd(listOf(28, 21, 56))) }
+    }
+
+    @Test
+    fun euclidFactors_test() {
+        time { assertEquals(listOf(3, 5L), euclidFactors(listOf(3, 5))) }
+        time { assertEquals(listOf(1, 2L), euclidFactors(setOf(3, 6))) }
+        time { assertEquals(listOf(1, 4L), euclidFactors(listOf(2, 8))) }
+        time { assertEquals(listOf(1, 4, 2L), euclidFactors(listOf(2, 8, 4))) }
+        time { assertEquals(listOf(4, 3, 8L), euclidFactors(listOf(28, 21, 56))) }
+    }
 }

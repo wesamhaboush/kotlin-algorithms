@@ -28,6 +28,12 @@ we generally want to:
 not that this is the same as the max
 4- if 1 is less than 2 other, advance it until it is same or greater than the max
 
+Notes:
+for equation: ax + by = c
+if gcd(a,b) does not divide c, there is no integer solutions.
+
+
+Note: we can drop the triangular work because every hexagonal number is a triangular number as well.
  */
 
 //triangular hexadecimal, and pentagonal
@@ -64,3 +70,8 @@ fun advanceToMax(n: Long, advance: KFunction1<Long, Long>, maximum: Long): Pair<
 
 
 fun allEqual(n1: Long, n2: Long, n3: Long): Boolean = n1 == n2 && n1 == n3
+
+fun triangularHexagonalPentagonals2(): Sequence<Long> =
+        generateSequence(1L) { it + 1 }
+                .map { hexagonal(it) }
+                .filter { isPentagonal(it) }

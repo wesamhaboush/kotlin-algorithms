@@ -3,7 +3,6 @@ package algorithms
 import java.util.*
 
 
-
 fun isPrime(number: Long): Boolean {
     if (number == 2L || number == 3L) return true
     if (number < 2) return false
@@ -174,8 +173,8 @@ object Combinations {
                 .take(items.size).toSet()
 
         return powerSet(indices)
-                .filter{ sizeFilter(it) }
-                .map{ toItems(items, it) }
+                .filter { sizeFilter(it) }
+                .map { toItems(items, it) }
                 .toSet()
     }
 
@@ -186,8 +185,7 @@ object Combinations {
     }
 }
 
-fun sumDigitLists(digitLists: Collection<List<Int>>): List<Int>
-{
+fun sumDigitLists(digitLists: Collection<List<Int>>): List<Int> {
     return digitLists.reduce(::findSum)
 }
 
@@ -252,14 +250,28 @@ fun pentagonal(n: Long): Long = n * (3 * n - 1) / 2
 
 //Tn=n(n+1)/2	 	1, 3, 6, 10, 15, ...
 fun triangulars(): Sequence<Pair<Long, Long>> =
-    generateSequence(1L) { it + 1 }
-            .map { Pair(it, triangular(it)) }
+        generateSequence(1L) { it + 1 }
+                .map { Pair(it, triangular(it)) }
 
 //Hn=n(2n−1)	 	1, 6, 15, 28, 45, ...
 fun hexagonals(): Sequence<Pair<Long, Long>> =
-    generateSequence(1L) { it + 1 }
-            .map { Pair(it, hexagonal(it)) }
+        generateSequence(1L) { it + 1 }
+                .map { Pair(it, hexagonal(it)) }
 
 fun triangular(n: Long): Long = n * (n + 1) / 2
 
 fun hexagonal(n: Long): Long = n * (2L * n - 1)
+
+fun gcd(a: Long, b: Long): Long =
+        if (b == 0L)
+            a
+        else
+            gcd(b, a % b)
+
+fun gcd(numbers: Collection<Long>): Long =
+        numbers.reduce{ a, b -> gcd(a, b) }
+
+fun euclidFactors(numbers: Collection<Long>): List<Long> {
+    val gcd = gcd(numbers)
+    return numbers.map { it / gcd }
+}

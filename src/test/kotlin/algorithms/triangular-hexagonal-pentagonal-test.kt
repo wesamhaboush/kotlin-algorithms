@@ -19,4 +19,19 @@ class `triangular-hexagonal-pentagonal-test` {
             assertEquals(Thp(Pair(55385, 1533776805), Pair(27693, 1533776805), Pair(31977, 1533776805)), triangularHexagonalPentagonals.next())
         }
     }
+
+    @Test
+    fun triangulars_test2() {
+        time {
+            /*
+            Thp(tn=(1, 1), hn=(1, 1), pn=(1, 1))
+            Thp(tn=(285, 40755), hn=(143, 40755), pn=(165, 40755))
+            Thp(tn=(55385, 1533776805), hn=(27693, 1533776805), pn=(31977, 1533776805))
+             */
+            val triangularHexagonalPentagonals = triangularHexagonalPentagonals2().iterator()
+            assertEquals(1, triangularHexagonalPentagonals.next())
+            assertEquals(40755, triangularHexagonalPentagonals.next())
+            assertEquals(1533776805, triangularHexagonalPentagonals.next())
+        }
+    }
 }
