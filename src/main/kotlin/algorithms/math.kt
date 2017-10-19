@@ -275,3 +275,24 @@ fun euclidFactors(numbers: Collection<Long>): List<Long> {
     val gcd = gcd(numbers)
     return numbers.map { it / gcd }
 }
+
+
+fun primeFactors(n: Long): List<Long> {
+    if (n == 1L) {
+        return emptyList()
+    } else if (isPrime(n)) {
+        return listOf(n)
+    } else {
+        val factor = findAFactor(n)
+        //check if this factor is prime, then add it, no further work on it, otherwise, break it even further to its primes
+        val resultsFromFactor = if(isPrime(factor)) listOf(factor) else primeFactors(factor)
+        return resultsFromFactor + primeFactors( n / factor)
+    }
+}
+
+private fun findAFactor(n: Long): Long =
+    // no factors exist after half a number (check it out, for example:
+    // 14 = 2 x 7,
+    // 25 = 5 x 5
+    // 64 = 2 x 32 = 2 x 2 x 16 = 2 x 2 x 2 x 8 = 2 x 2 x 2 x 2 x 4 = 2 x 2 x 2 x 2 x 2
+    (2..(n / 2)).first { i -> n % i == 0L }
