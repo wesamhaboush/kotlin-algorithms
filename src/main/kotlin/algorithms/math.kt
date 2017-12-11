@@ -95,36 +95,41 @@ fun toBase(decimal: Long, base: Long): Long {
     return result
 }
 
-fun primes(max: Long): Iterator<Long> {
+fun primes(max: Long): Iterator<Long> = primesBetween(2, max)
+
+fun primesBetween(min: Long, max: Long): Iterator<Long> {
     return object : Iterator<Long> {
-        private var nextPrime = 2L
+        private var nextPrime = nextPrime(min)
 
         override fun next(): Long {
             val prev = nextPrime
-            nextPrime = nextPrime()
+            nextPrime = nextPrime(nextPrime + 1)
             return prev
         }
 
         override fun hasNext(): Boolean {
             return nextPrime < max
         }
+    }
+}
 
-        private fun nextPrime(): Long {
-            while (true) {
-                nextPrime++
-                if (nextPrime <= 3)
-                    return nextPrime
-                var divisible = false
-                var t = 2L
-                while (!divisible && t * t <= nextPrime) {
-                    if (nextPrime % t == 0L)
-                        divisible = true
-                    t++
-                }
-                if (!divisible)
-                    return nextPrime
-            }
+fun nextPrime(startPoint: Long): Long {
+    var nextPrimeMayBe = startPoint
+    while (true) {
+        if(nextPrimeMayBe <=2)
+            return 2
+        if (nextPrimeMayBe <= 3)
+            return 3
+        var divisible = false
+        var t = 2L
+        while (!divisible && t * t <= nextPrimeMayBe) {
+            if (nextPrimeMayBe % t == 0L)
+                divisible = true
+            t++
         }
+        if (!divisible)
+            return nextPrimeMayBe
+        nextPrimeMayBe++
     }
 }
 

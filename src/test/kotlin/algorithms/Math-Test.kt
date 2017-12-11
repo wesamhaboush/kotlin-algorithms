@@ -331,4 +331,16 @@ class `Math-Test` {
         time { assertEquals(listOf(1, 4, 2L), euclidFactors(listOf(2, 8, 4))) }
         time { assertEquals(listOf(4, 3, 8L), euclidFactors(listOf(28, 21, 56))) }
     }
+
+    @Test
+    fun nextPrime_test() {
+        time { assertEquals(2, nextPrime(0)) }
+        time { assertEquals(2, nextPrime(2)) }
+        time { assertEquals(3, nextPrime(3)) }
+        time { assertEquals(5, nextPrime(4)) }
+        time { assertEquals(5, nextPrime(5)) }
+        time { assertEquals(7, nextPrime(6)) }
+        time { assertEquals(7, nextPrime(7)) }
+        time { assertEquals(11, nextPrime(8)) }
+    }
 }
