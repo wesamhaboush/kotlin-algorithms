@@ -40,7 +40,7 @@ class `integer-right-triangles-test` {
                     .entries
                     .maxBy { it.value.size }
                     .let {
-                        println(it)
+//                        println(it)
                         assertEquals(840L, it?.key)
                         assertEquals(8, it?.value?.size)
                         assertEquals(

@@ -343,4 +343,60 @@ class `Math-Test` {
         time { assertEquals(7, nextPrime(7)) }
         time { assertEquals(11, nextPrime(8)) }
     }
+
+    @Test
+    fun allPossibleSequences_test() {
+        time {
+            assertEquals(
+                    listOf(
+                            Pair(0, 0), Pair(0, 1), Pair(0, 2),
+                            Pair(1, 1), Pair(1, 2),
+                            Pair(2, 2)
+                    ),
+                    sequencesFrom(3).toList()
+            )
+        }
+    }
+
+    @Test
+    fun allPossibleSublists_test() {
+        time {
+            assertEquals(
+                    listOf(
+                            listOf(1), listOf(1, 2), listOf(1, 2, 3), listOf(1, 2, 3, 4),
+                            listOf(2), listOf(2, 3), listOf(2, 3, 4),
+                            listOf(3), listOf(3, 4),
+                            listOf(4)
+                    ),
+                    allSublists(listOf(1, 2, 3, 4)).toList()
+            )
+        }
+    }
+
+    @Test
+    fun sequencesOfSize_test() {
+        time {
+            assertEquals(
+                    listOf(
+                            Pair(0, 2), Pair(1, 3)
+                    ),
+                    sequencesOfSize(4, 3).toList()
+            )
+        }
+    }
+
+    @Test
+    fun sublistsOfSize_test() {
+        time {
+            assertEquals(
+                    listOf(
+                            listOf(1, 2),
+                            listOf(2, 3),
+                            listOf(3, 4)
+                    ),
+                    sublistsOfSize(listOf(1, 2, 3, 4), 2).toList()
+            )
+        }
+    }
+
 }

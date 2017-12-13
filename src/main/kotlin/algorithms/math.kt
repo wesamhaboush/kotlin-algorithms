@@ -301,3 +301,22 @@ private fun findAFactor(n: Long): Long =
     // 25 = 5 x 5
     // 64 = 2 x 32 = 2 x 2 x 16 = 2 x 2 x 2 x 8 = 2 x 2 x 2 x 2 x 4 = 2 x 2 x 2 x 2 x 2
     (2..(n / 2)).first { i -> n % i == 0L }
+
+fun sequencesFrom(n: Int): Sequence<Pair<Int, Int>> = generateSequence(0L) { it + 1 }
+        .take(n)
+        .flatMap {
+            val from = it
+            generateSequence(from) { it + 1 }
+                    .take((n - from).toInt())
+                    .map { Pair(from.toInt(), it.toInt()) }
+        }
+
+fun <T> allSublists(aList: List<T>): Sequence<List<T>> = sequencesFrom(aList.size)
+        .map { aList.subList(it.first, it.second + 1) }
+
+fun sequencesOfSize(n: Int, size: Int): Sequence<Pair<Int, Int>> = generateSequence(0L) { it + 1 }
+        .take(n - size + 1)
+        .map { Pair(it.toInt(), it.toInt() + size - 1) }
+
+fun <T> sublistsOfSize(aList: List<T>, size: Int): Sequence<List<T>> = sequencesOfSize(aList.size, size)
+        .map { aList.subList(it.first, it.second + 1) }

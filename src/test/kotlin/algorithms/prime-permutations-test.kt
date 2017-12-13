@@ -18,15 +18,6 @@ class `prime-permutations` {
     }
 
     @Test
-    fun primesOf4Digits_test3() {
-        time {
-            val primesWith4DistinctDigits = primesWith4SameDigits()
-            println("${primesWith4DistinctDigits.size}")
-            println("${primesWith4DistinctDigits}")
-        }
-    }
-
-    @Test
     fun withSameDistance_test() {
         time {
             assertTrue { withSameDistance(listOf(1, 5, 9)) }

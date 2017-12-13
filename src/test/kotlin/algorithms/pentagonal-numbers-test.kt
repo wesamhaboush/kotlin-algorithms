@@ -66,7 +66,6 @@ class `pentagonal-numbers-test` {
             val result = findTargetPentagonalPair()
             assertEquals(Pair(Pair(2167L, 7042750L), Pair(1020L, 1560090L)), result)
             assertEquals(5482660, result.first.second - result.second.second)
-            println(result)
         }
     }
 }
