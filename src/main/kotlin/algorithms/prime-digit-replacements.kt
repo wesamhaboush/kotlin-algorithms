@@ -29,12 +29,11 @@ because then it would not complete the family to an 88 members. Let's try the ma
  */
 
 
-fun findFamilyOfPrimesOfSize(familySize: Int) = primesWithDuplicateDigits()
+fun findFamilyOfPrimesOfSize(familySize: Int) = primesWithDuplicateDigits(familySize)
 //generate from this is: 770986, 880986, and 990986, so let's exclude this one
 //for example, if prime is: 770986, and family size is 4, we cannot use this one, cz the best we can
-//filter ones that have duplicates that are less than 10 - family size!!
-        // note: the filter here checkes the first few indices of the array because those are the digits
-        .filter { onlyDigitsSmallEnoughToAllowFamilySize(it.third.first, familySize) }
+//filter ones that have duplicates that are less than 10 - familySize!!
+
         // now find the family and check it is the right size
         .map { Triple(primesFromReplacements(it), it.second, it.third) }
         .filter { it.first.size >= familySize }
@@ -56,7 +55,7 @@ fun primesFromReplacements(initialPrimeInFamily: Triple<Long, List<Int>, Pair<In
 private fun onlyDigitsSmallEnoughToAllowFamilySize(it: Int, familySize: Int) = it < (10 - familySize)
 
 
-fun primesWithDuplicateDigits(): Sequence<Triple<Long, List<Int>, Pair<Int, List<Int>>>> = primes(1000000)
+fun primesWithDuplicateDigits(familySize: Int): Sequence<Triple<Long, List<Int>, Pair<Int, List<Int>>>> = primes(1000000)
         .asSequence()
         .map { primeNumber ->
             val digits = numberToDigits(primeNumber)
@@ -80,6 +79,8 @@ fun primesWithDuplicateDigits(): Sequence<Triple<Long, List<Int>, Pair<Int, List
                     //triple (111, [1,1,1], (1, [1, 2])
                     //triple (111, [1,1,1], (1, [0, 1, 2])
                     .flatMap { breakIntoMultipleBasedOnIndexCombinations(it) }
+                    // note: the filter here checks the first few indices of the array because those are the digits
+                    .filter { onlyDigitsSmallEnoughToAllowFamilySize(it.third.first, familySize) }
                     .asSequence()
         }
 

@@ -8,7 +8,7 @@ class `prime-digit-replacements-test` {
     @Test
     fun primesWithDuplicateDigits_test() {
         time {
-            val v = primesWithDuplicateDigits().iterator()
+            val v = primesWithDuplicateDigits(2).iterator()
             assertEquals(11, v.next().first)
             assertEquals(101, v.next().first)
             assertEquals(113, v.next().first)
