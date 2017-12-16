@@ -399,4 +399,86 @@ class `Math-Test` {
         }
     }
 
+    @Test
+    fun getPascalRows_test() {
+        time {
+            assertEquals(
+                    listOf(listOf(1)),
+                    getPascalRows(1)
+            )
+            assertEquals(
+                    listOf(
+                            listOf(1),
+                            listOf(1, 1)
+                    ),
+                    getPascalRows(2)
+            )
+            assertEquals(
+                    listOf(
+                            listOf(1),
+                            listOf(1, 1),
+                            listOf(1, 2, 1)
+                    ),
+                    getPascalRows(3)
+            )
+            assertEquals(
+                    listOf(
+                            listOf(1),
+                            listOf(1, 1),
+                            listOf(1, 2, 1),
+                            listOf(1, 3, 3, 1)
+                    ),
+                    getPascalRows(4)
+            )
+        }
+
+        time {
+            assertEquals(
+                    listOf(listOf(1)),
+                    getPascalRows2(1)
+            )
+            assertEquals(
+                    listOf(
+                            listOf(1),
+                            listOf(1, 1)
+                    ),
+                    getPascalRows2(2)
+            )
+            assertEquals(
+                    listOf(
+                            listOf(1),
+                            listOf(1, 1),
+                            listOf(1, 2, 1)
+                    ),
+                    getPascalRows2(3)
+            )
+            assertEquals(
+                    listOf(
+                            listOf(1),
+                            listOf(1, 1),
+                            listOf(1, 2, 1),
+                            listOf(1, 3, 3, 1)
+                    ),
+                    getPascalRows2(4)
+            )
+        }
+    }
+
+    @Test
+    fun getPascalRow_test() {
+        time {
+            assertEquals(listOf(1), getPascalRow(0))
+            assertEquals(listOf(1, 1), getPascalRow(1))
+            assertEquals(listOf(1, 2, 1), getPascalRow(2))
+            assertEquals(listOf(1, 3, 3, 1), getPascalRow(3))
+        }
+
+        time {
+            assertEquals(listOf(1), getPascalRow2(0))
+            assertEquals(listOf(1, 1), getPascalRow2(1))
+            assertEquals(listOf(1, 2, 1), getPascalRow2(2))
+            assertEquals(listOf(1, 3, 3, 1), getPascalRow2(3))
+        }
+    }
+
 }

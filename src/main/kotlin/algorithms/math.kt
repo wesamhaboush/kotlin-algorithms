@@ -116,7 +116,7 @@ fun primesBetween(min: Long, max: Long): Iterator<Long> {
 fun nextPrime(startPoint: Long): Long {
     var nextPrimeMayBe = startPoint
     while (true) {
-        if(nextPrimeMayBe <=2)
+        if (nextPrimeMayBe <= 2)
             return 2
         if (nextPrimeMayBe <= 3)
             return 3
@@ -274,7 +274,7 @@ fun gcd(a: Long, b: Long): Long =
             gcd(b, a % b)
 
 fun gcd(numbers: Collection<Long>): Long =
-        numbers.reduce{ a, b -> gcd(a, b) }
+        numbers.reduce { a, b -> gcd(a, b) }
 
 fun euclidFactors(numbers: Collection<Long>): List<Long> {
     val gcd = gcd(numbers)
@@ -290,17 +290,17 @@ fun primeFactors(n: Long): List<Long> {
     } else {
         val factor = findAFactor(n)
         //check if this factor is prime, then add it, no further work on it, otherwise, break it even further to its primes
-        val resultsFromFactor = if(isPrime(factor)) listOf(factor) else primeFactors(factor)
-        return resultsFromFactor + primeFactors( n / factor)
+        val resultsFromFactor = if (isPrime(factor)) listOf(factor) else primeFactors(factor)
+        return resultsFromFactor + primeFactors(n / factor)
     }
 }
 
 private fun findAFactor(n: Long): Long =
-    // no factors exist after half a number (check it out, for example:
-    // 14 = 2 x 7,
-    // 25 = 5 x 5
-    // 64 = 2 x 32 = 2 x 2 x 16 = 2 x 2 x 2 x 8 = 2 x 2 x 2 x 2 x 4 = 2 x 2 x 2 x 2 x 2
-    (2..(n / 2)).first { i -> n % i == 0L }
+        // no factors exist after half a number (check it out, for example:
+        // 14 = 2 x 7,
+        // 25 = 5 x 5
+        // 64 = 2 x 32 = 2 x 2 x 16 = 2 x 2 x 2 x 8 = 2 x 2 x 2 x 2 x 4 = 2 x 2 x 2 x 2 x 2
+        (2..(n / 2)).first { i -> n % i == 0L }
 
 fun sequencesFrom(n: Int): Sequence<Pair<Int, Int>> = generateSequence(0L) { it + 1 }
         .take(n)
@@ -320,3 +320,85 @@ fun sequencesOfSize(n: Int, size: Int): Sequence<Pair<Int, Int>> = generateSeque
 
 fun <T> sublistsOfSize(aList: List<T>, size: Int): Sequence<List<T>> = sequencesOfSize(aList.size, size)
         .map { aList.subList(it.first, it.second + 1) }
+
+fun getPascalRows(numRows: Int): List<List<Int>> {
+    val result = mutableListOf<List<Int>>()
+    if (numRows <= 0)
+        return result
+
+    var pre = mutableListOf(1)
+    result.add(pre)
+
+    for (i in 2..numRows) {
+        val cur = mutableListOf<Int>()
+
+        cur.add(1) //first
+        for (j in 0 until pre.size - 1) {
+            cur.add(pre[j] + pre[j + 1]) //middle
+        }
+        cur.add(1)//last
+
+        result.add(cur)
+        pre = cur
+    }
+
+    return result
+}
+
+fun getPascalRows2(numRows: Int): List<List<Int>> =
+        generateSequence(0) { it + 1 }
+                .take(numRows) // account for zero based indexing in the count of rows requird
+                .fold(
+                        listOf(),
+                        { previousRows, _ ->
+                            val previousRow = if (previousRows.isEmpty()) listOf() else previousRows.last()
+                            val nextRow = nextPascalRow(previousRow)
+                            previousRows.plusElement(nextRow)
+                        }
+                )
+
+fun getPascalRow(rowIndex: Int): List<Int> {
+    val result = mutableListOf<Int>()
+
+    if (rowIndex < 0)
+        return result
+
+    result.add(1)
+    for (i in 1..rowIndex) {
+        for (j in result.size - 2 downTo 0) {
+            result[j + 1] = result[j] + result[j + 1]
+        }
+        result.add(1)
+    }
+    return result
+}
+
+fun getPascalRow2(rowIndex: Int): List<Int> =
+        generateSequence(0) { it + 1 }
+                .take(rowIndex + 1) // account for zero based indexing in the count of rows requird
+                .fold(listOf(), { previousRow, _ -> nextPascalRow(previousRow) })
+
+// from previous row, generate the next
+private fun nextPascalRow(previousRow: List<Int>): List<Int> {
+    return if (previousRow.isEmpty()) // the base case
+        listOf(1)
+    else
+        generateSequence(0) { it + 1 }
+                .take(previousRow.size + 1)
+                .map {
+                    //the ifs are to account for the edge cases (they are recursion base cases)
+                    // left maps to previous row index - 1
+                    val leftValue =
+                            if (it == 0)
+                                0
+                            else previousRow[it - 1]
+                    // right maps to previous row index
+                    val rightValue =
+                            if (it == previousRow.size)
+                                0
+                            else
+                                previousRow[it]
+                    leftValue + rightValue
+                }
+                .toList()
+}
