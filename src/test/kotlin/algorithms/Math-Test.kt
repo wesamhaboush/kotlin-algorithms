@@ -434,19 +434,19 @@ class `Math-Test` {
 
         time {
             assertEquals(
-                    listOf(listOf(1)),
+                    listOf(listOf(1L)),
                     getPascalRows2(1)
             )
             assertEquals(
                     listOf(
-                            listOf(1),
+                            listOf(1L),
                             listOf(1, 1)
                     ),
                     getPascalRows2(2)
             )
             assertEquals(
                     listOf(
-                            listOf(1),
+                            listOf(1L),
                             listOf(1, 1),
                             listOf(1, 2, 1)
                     ),
@@ -454,7 +454,7 @@ class `Math-Test` {
             )
             assertEquals(
                     listOf(
-                            listOf(1),
+                            listOf(1L),
                             listOf(1, 1),
                             listOf(1, 2, 1),
                             listOf(1, 3, 3, 1)
@@ -474,10 +474,10 @@ class `Math-Test` {
         }
 
         time {
-            assertEquals(listOf(1), getPascalRow2(0))
-            assertEquals(listOf(1, 1), getPascalRow2(1))
-            assertEquals(listOf(1, 2, 1), getPascalRow2(2))
-            assertEquals(listOf(1, 3, 3, 1), getPascalRow2(3))
+            assertEquals(listOf(1L), getPascalRow2(0))
+            assertEquals(listOf(1L, 1), getPascalRow2(1))
+            assertEquals(listOf(1L, 2, 1), getPascalRow2(2))
+            assertEquals(listOf(1L, 3, 3, 1), getPascalRow2(3))
         }
     }
 

@@ -21,3 +21,17 @@ Solution Analysis:
 use pascal triangle row calculation to find out those numbers.
  */
 
+fun countCombinationsAboveMaxForAllN(n: Int, max: Long): Int = getPascalRows2(n)
+        // some times the numbers in the middle of the triangle are so huge, Longs are not enough ,we get negative values
+        // so the idea here is not to just count, but rather simply find the boundaries (between them all entries must match),
+        // because the triangle is symmetric, you can double that that does not match or match from the other side
+        // we could also use variables can hold arbitrary numerical values if we want to!!
+        .map {
+            val indexOfFirst = it.indexOfFirst { it > max }
+            if (indexOfFirst < 0) { // if element not found, then we have 0 matches
+                0
+            } else {
+                it.size - 2 * indexOfFirst // we double cz end of beginning of the row have same values (e.g. 1, 2, 2, 3, 3, 2, 2, 1)
+            }
+        }
+        .sum()

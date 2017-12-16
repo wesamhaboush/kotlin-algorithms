@@ -283,15 +283,15 @@ fun euclidFactors(numbers: Collection<Long>): List<Long> {
 
 
 fun primeFactors(n: Long): List<Long> {
-    if (n == 1L) {
-        return emptyList()
+    return if (n == 1L) {
+        emptyList()
     } else if (isPrime(n)) {
-        return listOf(n)
+        listOf(n)
     } else {
         val factor = findAFactor(n)
         //check if this factor is prime, then add it, no further work on it, otherwise, break it even further to its primes
         val resultsFromFactor = if (isPrime(factor)) listOf(factor) else primeFactors(factor)
-        return resultsFromFactor + primeFactors(n / factor)
+        resultsFromFactor + primeFactors(n / factor)
     }
 }
 
@@ -345,7 +345,7 @@ fun getPascalRows(numRows: Int): List<List<Int>> {
     return result
 }
 
-fun getPascalRows2(numRows: Int): List<List<Int>> =
+fun getPascalRows2(numRows: Int): List<List<Long>> =
         generateSequence(0) { it + 1 }
                 .take(numRows) // account for zero based indexing in the count of rows requird
                 .fold(
@@ -373,13 +373,13 @@ fun getPascalRow(rowIndex: Int): List<Int> {
     return result
 }
 
-fun getPascalRow2(rowIndex: Int): List<Int> =
+fun getPascalRow2(rowIndex: Int): List<Long> =
         generateSequence(0) { it + 1 }
                 .take(rowIndex + 1) // account for zero based indexing in the count of rows requird
                 .fold(listOf(), { previousRow, _ -> nextPascalRow(previousRow) })
 
 // from previous row, generate the next
-private fun nextPascalRow(previousRow: List<Int>): List<Int> {
+private fun nextPascalRow(previousRow: List<Long>): List<Long> {
     return if (previousRow.isEmpty()) // the base case
         listOf(1)
     else
