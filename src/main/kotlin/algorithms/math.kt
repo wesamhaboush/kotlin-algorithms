@@ -81,6 +81,8 @@ fun <T> isPalindromic(list: List<T>): Boolean {
     }
 }
 
+fun isDecimalPalindromic(number: Long): Boolean = isPalindromic(numberToDigits(number))
+
 fun toBase(decimal: Long, base: Long): Long {
     var runningDecimal = decimal
     var result = 0L
@@ -289,7 +291,7 @@ fun primeFactors(n: Long): List<Long> {
         listOf(n)
     } else {
         val factor = findAFactor(n)
-        //check if this factor is prime, then add it, no further work on it, otherwise, break it even further to its primes
+        //check if this factor is prime, then addAsNumbers it, no further work on it, otherwise, break it even further to its primes
         val resultsFromFactor = if (isPrime(factor)) listOf(factor) else primeFactors(factor)
         resultsFromFactor + primeFactors(n / factor)
     }

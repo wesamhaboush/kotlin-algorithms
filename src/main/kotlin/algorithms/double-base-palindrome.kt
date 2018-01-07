@@ -14,9 +14,7 @@ fun isBinaryPalindromic(number: Long): Boolean {
     return isPalindromic(number.toString(2).toList())
 }
 
-fun isDecimalPalindromic(number: Long): Boolean {
-    return isPalindromic(numberToDigits(number))
-}
+
 
 fun findPalindromicNumbersInBothBinaryAndDecimalBelow(max: Int): Sequence<Long> {
     return generateSequence(0L) { it + 1 }
