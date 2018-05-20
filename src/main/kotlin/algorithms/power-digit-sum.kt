@@ -15,27 +15,6 @@ Considering natural numbers of the form, a^b, where a, b < 100, what is the maxi
 
 Solution:
 
-I have two lines of discovery:
-- the easy one is to do the powering using multiplicatin manaully like below.
-- the second look for an equation that produces some kind of pattern or equation using some
-mathematical laws. so far i have failed to find such solution
-
-In order to improve performance and to explore the inner of the problem
-a little better, let's see what information we can gather.
-According to Problem 25, the number length function
-L(n)=⌊1+log10(n)⌋
-and therefore L(a^b)=⌊1+log10(a^b)⌋=⌊1+b⋅log10(a)⌋.
-
-The upper limit is then 9⋅L(ab)
-and if we say all digits are uniformly distributed, the expected
-sum of the digits would be 5⋅L(ab), which gives
-9⋅L(99^99)=9⋅198=1782, 5⋅L(99^99)=5⋅198=999 and
-similarly 9⋅L(90^90)=9⋅176=1584, 5⋅L(90^90)=5⋅176=880.
-
-Since the expected value raises dramatically from 880 to 990 in
-this small interval, it's probably safe to start with a=90 and
-b=90:
-
 'a' can't be 10 multiply cz it will be full of zeros
 
 So here is the search solution:
@@ -45,9 +24,7 @@ until the maximum possible sum (9 times number of digits) can never be higher th
 current sum. For example, if we found a sum that is 1100, and the maximum digit sum for
 7^7 is 900, there is no need to go down any further. This scheme saved us ~70% of the search
 space
-
 */
-
 object PowerDigitSum {
 
     fun sumDigitsOfExponent(base: Int, exp: Int): Int =
