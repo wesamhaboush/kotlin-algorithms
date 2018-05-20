@@ -1,5 +1,8 @@
 package algorithms
 
+import java.math.BigInteger
+
+
 /*
 Powerful digit sum
 Problem 56
@@ -47,7 +50,15 @@ space
 
 object PowerDigitSum {
 
-    fun sumDigitsOfExponent(base: Int, exp: Int): Int {
+    fun sumDigitsOfExponent(base: Int, exp: Int): Int =
+            BigInteger(base.toString())
+                    .pow(exp)
+                    .toString()
+                    .toCharArray()
+                    .map { it - '0' }
+                    .sum()
+
+    fun sumDigitsOfExponentManual(base: Int, exp: Int): Int {
         val numberOfDigits = digitCountOf(base, exp)
         val digits = IntArray(numberOfDigits)
         digits[0] = base
@@ -63,12 +74,10 @@ object PowerDigitSum {
             }
         }
 
-        return digits
-                .map { it }
-                .sum()
+        return digits.sum()
     }
 
-    fun maxPowerDigitSum(maxBase: Int, maxExp: Int): Int {
+    fun maxPowerDigitSumOptimized(maxBase: Int, maxExp: Int): Int {
         var base = maxBase
         var maxSum = -1
         while (maxSum < maxDigitSum(base, maxExp)) { // base loop
@@ -81,6 +90,18 @@ object PowerDigitSum {
         }
         return maxSum
     }
+
+    fun maxPowerDigitSumBruteforce(maxBase: Int, maxExp: Int): Int =
+            generateSequence(1) { it + 1 }
+                    .take(maxBase)
+                    .flatMap { a ->
+                        generateSequence(1) { it + 1 }
+                                .take(maxExp)
+                                .map { b ->
+                                    sumDigitsOfExponent(a, b)
+                                }
+                    }
+                    .max() ?: 0
 
     fun digitCountOf(base: Int, exp: Int): Int = Math.floor(1 + exp * Math.log10(base.toDouble())).toInt()
     private fun maxDigitSum(base: Int, exp: Int): Int = 9 * digitCountOf(base, exp)

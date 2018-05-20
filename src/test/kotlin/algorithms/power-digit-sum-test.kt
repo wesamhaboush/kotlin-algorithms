@@ -16,25 +16,16 @@ class `power-digit-sum-test` {
     @Test
     fun powerDigitSum2_crude_test() {
         time {
-            val max = generateSequence(1) { it + 1 }
-                    .take(99)
-                    .flatMap { a ->
-                        generateSequence(1) { it + 1 }
-                                .take(99)
-                                .map { b ->
-                                    PowerDigitSum.sumDigitsOfExponent(a, b)
-                                }
-                    }
-                    .max()
-            assertEquals(972, max)
+            assertEquals(972, PowerDigitSum.maxPowerDigitSumBruteforce(99, 99))
         }
     }
 
     @Test
     fun powerDigitSum_searcher_test() {
         time {
-            val maxPowerDigitSum = PowerDigitSum.maxPowerDigitSum(99, 99)
-            assertEquals(972, maxPowerDigitSum)
+            assertEquals(972, PowerDigitSum.maxPowerDigitSumOptimized(99, 99))
+            assertEquals(1450, PowerDigitSum.maxPowerDigitSumOptimized(99, 150))
+            assertEquals(1045, PowerDigitSum.maxPowerDigitSumOptimized(150, 99))
         }
     }
 
