@@ -1,5 +1,6 @@
 package algorithms
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -433,34 +434,26 @@ class `Math-Test` {
         }
 
         time {
-            assertEquals(
-                    listOf(listOf(1L)),
-                    getPascalRows2(1)
-            )
-            assertEquals(
-                    listOf(
+            assertThat(getPascalRows2(1))
+                    .containsExactly(listOf(1L))
+            assertThat(getPascalRows2(2))
+                    .containsExactly(
                             listOf(1L),
                             listOf(1, 1)
-                    ),
-                    getPascalRows2(2)
-            )
-            assertEquals(
-                    listOf(
+                    )
+            assertThat(getPascalRows2(3))
+                    .containsExactly(
                             listOf(1L),
                             listOf(1, 1),
                             listOf(1, 2, 1)
-                    ),
-                    getPascalRows2(3)
-            )
-            assertEquals(
-                    listOf(
+                    )
+            assertThat(getPascalRows2(4))
+                    .containsExactly(
                             listOf(1L),
                             listOf(1, 1),
                             listOf(1, 2, 1),
                             listOf(1, 3, 3, 1)
-                    ),
-                    getPascalRows2(4)
-            )
+                    )
         }
     }
 
